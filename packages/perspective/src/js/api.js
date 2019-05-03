@@ -9,6 +9,14 @@
 
 import {bindall} from "./utils.js";
 
+// Dispatch asynchronous method calls and subscribe to events
+
+/**
+ * Unbind a listener to an event.
+ *s
+ * @param {*} method
+ * @param {*} cmd
+ */
 function unsubscribe(method, cmd) {
     return function() {
         let resolve;
@@ -31,6 +39,12 @@ function unsubscribe(method, cmd) {
     };
 }
 
+/**
+ * Bind a listener to an event.
+ *
+ * @param {*} method
+ * @param {*} cmd
+ */
 function subscribe(method, cmd) {
     return function() {
         let resolve;
@@ -52,6 +66,12 @@ function subscribe(method, cmd) {
     };
 }
 
+/**
+ * Add a method call to the queue, preparing it for execution.
+ *
+ * @param {*} method
+ * @param {*} cmd
+ */
 function async_queue(method, cmd) {
     return function() {
         var args = Array.prototype.slice.call(arguments, 0, arguments.length);
@@ -69,6 +89,8 @@ function async_queue(method, cmd) {
         );
     };
 }
+
+// View method dispatchers
 
 function view(worker, table_name, config) {
     this._worker = worker;
@@ -126,6 +148,8 @@ view.prototype.remove_update = unsubscribe("remove_update", "view_method", true)
 view.prototype.on_delete = subscribe("on_delete", "view_method", true);
 
 view.prototype.remove_delete = unsubscribe("remove_delete", "view_method", true);
+
+// Table method dispatchers
 
 function table(worker, data, options) {
     this._worker = worker;
@@ -222,6 +246,8 @@ table.prototype.execute = function(f) {
     };
     this._worker.post(msg);
 };
+
+// WebWorker dispatcher methods
 
 export function worker() {
     this._worker = {

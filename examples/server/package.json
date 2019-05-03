@@ -1,0 +1,17 @@
+{
+    "name": "server",
+    "private": true,
+    "version": "0.3.0-rc.1",
+    "description": "An example that shows two Perspectives running - one on the server, and one on the client.",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "keywords": [],
+    "license": "Apache-2.0",
+    "dependencies": {
+        "@finos/perspective": "^0.3.0-rc.1",
+        "@finos/perspective-viewer": "^0.3.0-rc.1",
+        "@finos/perspective-viewer-highcharts": "^0.3.0-rc.1",
+        "@finos/perspective-viewer-hypergrid": "^0.3.0-rc.1"
+    }
+}
