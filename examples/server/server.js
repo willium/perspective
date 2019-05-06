@@ -8,24 +8,43 @@
  */
 
 const {WebSocketHost, table} = require("@finos/perspective/build/perspective.node.js");
-const fs = require("fs");
 
 // Start a WS/HTTP host on port 8080.  The `assets` property allows
 // the `WorkerHost()` to also serves the file structure rooted in this
 // module's directory.
 const host = new WebSocketHost({assets: [__dirname], port: 8080});
 
-// Read an arrow file from the file system and load it as a named table.
-const arr = fs.readFileSync(__dirname + "/test.arrow");
-const tbl = table(arr);
-host.host_table("table_one", tbl);
+// Generate new data for load and update
+const SECURITIES = ["AAPL.N", "AMZN.N", "QQQ.N", "NVDA.N", "TSLA.N", "FB.N", "MSFT.N", "TLT.N", "XIV.N", "YY.N", "CSCO.N", "GOOGL.N", "PCLN.N"];
 
-// Host a view, setting the `on_update` function to return updated rows
+const CLIENTS = ["Homer", "Marge", "Bart", "Lisa", "Maggie", "Moe", "Lenny", "Carl", "Krusty"];
+
+function newRows() {
+    var rows = [];
+    for (var x = 0; x < 5; x++) {
+        rows.push({
+            name: SECURITIES[Math.floor(Math.random() * SECURITIES.length)],
+            client: CLIENTS[Math.floor(Math.random() * CLIENTS.length)],
+            lastUpdate: new Date(),
+            chg: Math.random() * 20 - 10,
+            bid: Math.random() * 10 + 90,
+            ask: Math.random() * 10 + 100,
+            vol: Math.random() * 10 + 100
+        });
+    }
+    return rows;
+}
+
+// Read an arrow file from the file system and load it as a named table.
+const tbl = table(newRows(), {
+    limit: 500
+});
+host.host_table("table_one", tbl);
 const view = tbl.view();
 host.host_view("view_one", view);
 
-// Given the updated rows, post them through the websocketd
+// Update with new rows every 500 ms
 (function postRow() {
-    view.to_arrow().then(new_data => tbl.update(new_data));
-    setTimeout(postRow, 500);
+    tbl.update(newRows());
+    setTimeout(postRow, 2500);
 })();

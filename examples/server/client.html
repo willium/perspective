@@ -33,25 +33,31 @@
 
     <script>
         // Wait for the viewer to load, then:
-        window.addEventListener("WebComponentsReady", function() {
+        window.addEventListener("WebComponentsReady", async function() {
             const elem = document.getElementsByTagName("perspective-viewer")[0];
             const websocket_url = window.location.origin.replace("http", "ws");
+            const socket = new WebSocket(websocket_url);
 
-            // Bind to the server's worker instead of instantiating a Web Worker.
-            const worker = perspective.worker(websocket_url);
+            /**
+             * Bind to the server's worker, AND instantiate a client worker
+             * 
+             * This allows server-side updates with client-side rendering and pivoting.
+             */ 
+            const server_worker = perspective.worker(websocket_url);
+            const client_worker = perspective.worker();
 
+            const server_table = server_worker.open_table("table_one");
+            const server_view = server_worker.open_view("view_one");
+            const server_schema = await server_view.schema();
+            
+            const client_table = client_worker.table(server_schema);
+            
             // Bind the viewer to the server's Perspective table and associated view
-            elem.load(worker.open_table("table_one"));
-            const view = worker.open_view("view_one");
+            server_view.on_update(async function(new_rows){
+                await client_table.update(new_rows);
+            }, {mode: "rows"});
 
-            // Update client Perspective with new data when the server updates
-            view.on_update(
-                function(updated_rows) {
-                    console.log(updated_rows);
-                },
-                {mode: "rows"}
-            );
-
+            elem.load(client_table);
         });
     </script>
 
