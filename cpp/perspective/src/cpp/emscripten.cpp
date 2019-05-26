@@ -2116,8 +2116,6 @@ EMSCRIPTEN_BINDINGS(perspective) {
         .function<std::vector<t_tscalar>>(
             "get_column_slice", &t_data_slice<t_ctx0>::get_column_slice)
         .function<const std::vector<t_tscalar>&>("get_slice", &t_data_slice<t_ctx0>::get_slice)
-        .function<const std::vector<t_uindex>&>(
-            "get_row_indices", &t_data_slice<t_ctx0>::get_row_indices)
         .function<const std::vector<std::vector<t_tscalar>>&>(
             "get_column_names", &t_data_slice<t_ctx0>::get_column_names);
 
@@ -2126,8 +2124,6 @@ EMSCRIPTEN_BINDINGS(perspective) {
         .function<std::vector<t_tscalar>>(
             "get_column_slice", &t_data_slice<t_ctx1>::get_column_slice)
         .function<const std::vector<t_tscalar>&>("get_slice", &t_data_slice<t_ctx1>::get_slice)
-        .function<const std::vector<t_uindex>&>(
-            "get_row_indices", &t_data_slice<t_ctx1>::get_row_indices)
         .function<const std::vector<std::vector<t_tscalar>>&>(
             "get_column_names", &t_data_slice<t_ctx1>::get_column_names)
         .function<std::vector<t_tscalar>>("get_row_path", &t_data_slice<t_ctx1>::get_row_path);
@@ -2137,8 +2133,6 @@ EMSCRIPTEN_BINDINGS(perspective) {
         .function<std::vector<t_tscalar>>(
             "get_column_slice", &t_data_slice<t_ctx2>::get_column_slice)
         .function<const std::vector<t_tscalar>&>("get_slice", &t_data_slice<t_ctx2>::get_slice)
-        .function<const std::vector<t_uindex>&>(
-            "get_row_indices", &t_data_slice<t_ctx2>::get_row_indices)
         .function<const std::vector<std::vector<t_tscalar>>&>(
             "get_column_names", &t_data_slice<t_ctx2>::get_column_names)
         .function<std::vector<t_tscalar>>("get_row_path", &t_data_slice<t_ctx2>::get_row_path);
@@ -2204,14 +2198,6 @@ EMSCRIPTEN_BINDINGS(perspective) {
         .field("rows_changed", &t_stepdelta::rows_changed)
         .field("columns_changed", &t_stepdelta::columns_changed)
         .field("cells", &t_stepdelta::cells);
-
-    /******************************************************************************
-     *
-     * t_rowdelta
-     */
-    value_object<t_rowdelta>("t_rowdelta")
-        .field("rows_changed", &t_rowdelta::rows_changed)
-        .field("rows", &t_rowdelta::rows);
 
     /******************************************************************************
      *
