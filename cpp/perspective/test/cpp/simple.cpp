@@ -285,16 +285,6 @@ TEST(SCALAR, scalar_str)
     EXPECT_TRUE(mktscalar("a") == mktscalar("a"));
 }
 
-TEST(SCALAR, nan_test)
-{
-    EXPECT_TRUE(
-        mktscalar<double>(std::numeric_limits<double>::quiet_NaN())
-            .is_nan());
-    EXPECT_TRUE(
-        mktscalar<float>(std::numeric_limits<double>::quiet_NaN())
-            .is_nan());
-}
-
 TEST(SCALAR, difference)
 {
     EXPECT_EQ(
