@@ -118,6 +118,8 @@ class Row extends HTMLElement {
     }
 
     set filter(f) {
+        console.log(f);
+        console.log("this._initialized: " + this._initialized);
         const filter_dropdown = this.shadowRoot.querySelector("#filter_operator");
         const filter = JSON.parse(this.getAttribute("filter"));
         if (filter_dropdown.value !== filter.operator) {
@@ -131,10 +133,10 @@ class Row extends HTMLElement {
         }
         if (filter_dropdown.value === perspective.FILTER_OPERATORS.isNull ||
             filter_dropdown.value === perspective.FILTER_OPERATORS.isNotNull) {
-          filter_input.style.display = "none";
+            //filter_input.style.display = "none";
         } else {
-          filter_input.style.display = "inline-block";
-          filter_input.style.width = get_text_width(operand, 30);
+            //filter_input.style.display = "inline-block";
+            filter_input.style.width = get_text_width(operand, 30);
         }
     }
 
