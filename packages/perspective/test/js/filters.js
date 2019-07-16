@@ -303,6 +303,20 @@ module.exports = perspective => {
             });
         });
 
+        describe("is null", function() {
+            it("snickers", async function() {
+                const table = perspective.table([{x: 1, y: null}, {x: 2, y: null}, {x: 3, y: "x"}, {x: 4, y: "x"}, {x: 1, y: "y"}, {x: 2, y: "x"}, {x: 3, y: "y"}]);
+                const view = table.view({
+                    filter: [["y", "is null"]]
+                });
+                const answer = [{x: 1, y: null}, {x: 2, y: null}];
+                const result = await view.to_json();
+                expect(result).toEqual(answer);
+                view.delete();
+                table.delete();
+            });
+        });
+
         describe("nulls", function() {
             it("x > 2", async function() {
                 var table = perspective.table([{x: 3, y: 1}, {x: 2, y: 1}, {x: null, y: 1}, {x: null, y: 1}, {x: 4, y: 2}, {x: null, y: 2}]);

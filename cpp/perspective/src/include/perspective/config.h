@@ -49,10 +49,10 @@ public:
         const std::vector<std::string>& detail_columns, const t_totals totals,
         const std::vector<std::string>& sort_pivot,
         const std::vector<std::string>& sort_pivot_by, t_filter_op combiner,
-        const std::vector<t_fterm>& fterms,
-        const std::string& parent_pkey_column, const std::string& child_pkey_column,
-        const std::string& grouping_label_column, t_fmode fmode,
-        const std::vector<std::string>& filter_exprs, const std::string& grand_agg_str);
+        const std::vector<t_fterm>& fterms, const std::string& parent_pkey_column,
+        const std::string& child_pkey_column, const std::string& grouping_label_column,
+        t_fmode fmode, const std::vector<std::string>& filter_exprs,
+        const std::string& grand_agg_str);
 
     // view config
     t_config(const std::vector<std::string>& row_pivots,

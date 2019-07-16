@@ -144,8 +144,8 @@ to_double(const t_tscalar& c) {
 t_multisorter::t_multisorter(const std::vector<t_sorttype>& order)
     : m_sort_order(order) {}
 
-t_multisorter::t_multisorter(std::shared_ptr<const std::vector<t_mselem>> elems,
-    const std::vector<t_sorttype>& order)
+t_multisorter::t_multisorter(
+    std::shared_ptr<const std::vector<t_mselem>> elems, const std::vector<t_sorttype>& order)
     : m_sort_order(order)
     , m_elems(elems) {}
 

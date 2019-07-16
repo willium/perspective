@@ -131,11 +131,10 @@ class Row extends HTMLElement {
         if (!this._initialized) {
             filter_input.value = operand;
         }
-        if (filter_dropdown.value === perspective.FILTER_OPERATORS.isNull ||
-            filter_dropdown.value === perspective.FILTER_OPERATORS.isNotNull) {
-            //filter_input.style.display = "none";
+        if (filter_dropdown.value === perspective.FILTER_OPERATORS.isNull || filter_dropdown.value === perspective.FILTER_OPERATORS.isNotNull) {
+            filter_input.style.display = "none";
         } else {
-            //filter_input.style.display = "inline-block";
+            filter_input.style.display = "inline-block";
             filter_input.style.width = get_text_width(operand, 30);
         }
     }
@@ -186,8 +185,7 @@ class Row extends HTMLElement {
             case "string":
             default:
         }
-        if (filter_operator.value === perspective.FILTER_OPERATORS.isIn ||
-          filter_operator.value === perspective.FILTER_OPERATORS.isNotIn) {
+        if (filter_operator.value === perspective.FILTER_OPERATORS.isIn || filter_operator.value === perspective.FILTER_OPERATORS.isNotIn) {
             val = val.split(",").map(x => x.trim());
         }
         this.setAttribute("filter", JSON.stringify({operator: filter_operator.value, operand: val}));

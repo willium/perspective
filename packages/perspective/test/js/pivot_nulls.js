@@ -58,12 +58,7 @@ module.exports = perspective => {
         });
 
         it("aggregates that return NaN render correctly", async function() {
-            const dataWithNull1 = [
-                {name: "Homer", value: 3},
-                {name: "Homer", value: 1},
-                {name: "Marge", value: null},
-                {name: "Marge", value: null}
-            ];
+            const dataWithNull1 = [{name: "Homer", value: 3}, {name: "Homer", value: 1}, {name: "Marge", value: null}, {name: "Marge", value: null}];
 
             var table = perspective.table(dataWithNull1);
 
@@ -72,11 +67,7 @@ module.exports = perspective => {
                 aggregates: {value: "avg"}
             });
 
-            const answer = [
-                {__ROW_PATH__: [], name: 4, value: 2},
-                {__ROW_PATH__: ["Homer"], name: 2, value: 2},
-                {__ROW_PATH__: ["Marge"], name: 2, value: null}
-            ];
+            const answer = [{__ROW_PATH__: [], name: 4, value: 2}, {__ROW_PATH__: ["Homer"], name: 2, value: 2}, {__ROW_PATH__: ["Marge"], name: 2, value: null}];
 
             let results = await view.to_json();
             expect(results).toEqual(answer);

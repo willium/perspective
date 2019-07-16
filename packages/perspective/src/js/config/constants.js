@@ -78,7 +78,9 @@ export const FILTER_OPERATORS = {
     bitwiseOr: "|",
     and: "and",
     or: "or",
-}
+    beginsWith: "begins with",
+    endsWith: "ends with"
+};
 
 const BOOLEAN_FILTERS = [
     FILTER_OPERATORS.bitwiseAnd,
@@ -86,7 +88,9 @@ const BOOLEAN_FILTERS = [
     FILTER_OPERATORS.equals,
     FILTER_OPERATORS.doesNotEqual,
     FILTER_OPERATORS.or,
-    FILTER_OPERATORS.and
+    FILTER_OPERATORS.and,
+    FILTER_OPERATORS.isNull,
+    FILTER_OPERATORS.isNotNull
 ];
 
 const NUMBER_FILTERS = [
@@ -98,7 +102,7 @@ const NUMBER_FILTERS = [
     FILTER_OPERATORS.doesNotEqual,
     FILTER_OPERATORS.isNull,
     FILTER_OPERATORS.isNotNull
-]
+];
 
 const STRING_FILTERS = [
     FILTER_OPERATORS.equals,
@@ -107,7 +111,9 @@ const STRING_FILTERS = [
     FILTER_OPERATORS.isIn,
     FILTER_OPERATORS.isNotIn,
     FILTER_OPERATORS.beginsWith,
-    FILTER_OPERATORS.endsWith
+    FILTER_OPERATORS.endsWith,
+    FILTER_OPERATORS.isNull,
+    FILTER_OPERATORS.isNotNull
 ];
 
 const DATETIME_FILTERS = [
@@ -116,7 +122,9 @@ const DATETIME_FILTERS = [
     FILTER_OPERATORS.equals,
     FILTER_OPERATORS.lessThanOrEquals,
     FILTER_OPERATORS.greaterThanOrEquals,
-    FILTER_OPERATORS.doesNotEqual
+    FILTER_OPERATORS.doesNotEqual,
+    FILTER_OPERATORS.isNull,
+    FILTER_OPERATORS.isNotNull
 ];
 
 export const COLUMN_SEPARATOR_STRING = "|";
