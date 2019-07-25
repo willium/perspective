@@ -33,9 +33,9 @@
         "build": "npm-run-all --silent build:babel build:webpack:cjs build:webpack:umd",
         "test:build": "cpx \"test/html/*\" dist/umd",
         "watch": "webpack --color --watch --config src/config/d3fc.watch.config.js",
-        "test:run": "jest --silent --color 2>&1",
-        "test:unit": "jest --config=test/js/jest.unit.config.js --color --watch",
-        "test": "npm-run-all test:build test:run",
+        "test:integration": "jest --silent --color 2>&1",
+        "test:unit": "jest --config=test/js/jest.unit.config.js --color",
+        "test": "npm-run-all test:build test:integration test:unit",
         "clean": "rimraf dist",
         "clean:screenshots": "rimraf \"screenshots/**/*.@(failed|diff).png\""
     },
