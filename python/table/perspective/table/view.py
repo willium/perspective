@@ -40,6 +40,9 @@ class View(object):
 
         self._column_only = self._view.is_column_only()
 
+    def get_config(self):
+        return self._config._config
+
     def sides(self):
         '''How many pivoted sides does this View have?'''
         if len(self._config.get_row_pivots()) > 0 or len(self._config.get_column_pivots()) > 0:
@@ -102,6 +105,9 @@ class View(object):
         '''
         opts, column_names, data_slice = self._to_format_helper(options)
         return _PerspectiveDataFormatter.to_format(opts, self, column_names, data_slice, 'records')
+
+    def to_columns(self, options):
+        return self.to_dict(options)
 
     def to_dict(self, options=None):
         '''Serialize the view's dataset into a `dict` of `str` keys and `list` values.

@@ -16,12 +16,13 @@ class ViewConfig(object):
         Params:
             dict : the configuration dictionary provided by the user
         '''
-        self._row_pivots = config.get('row-pivots', [])
-        self._column_pivots = config.get('column-pivots', [])
-        self._aggregates = config.get('aggregates', {})
-        self._columns = config.get('columns', [])
-        self._sort = config.get('sort', [])
-        self._filter = config.get('filter', [])
+        self._config = config
+        self._config["row_pivots"] = self._row_pivots = config.get('row_pivots', [])
+        self._config["column_pivots"] = self._column_pivots = config.get('column_pivots', [])
+        self._config["aggregates"] = self._aggregates = config.get('aggregates', {})
+        self._config["columns"] = self._columns = config.get('columns', [])
+        self._config["sort"] = self._sort = config.get('sort', [])
+        self._config["filter"] = self._filter = config.get('filter', [])
         self._filter_op = config.get('filter_op', "and")
         self.row_pivot_depth = config.get("row_pivot_depth", None)
         self.column_pivot_depth = config.get("column_pivot_depth", None)

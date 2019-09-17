@@ -19,6 +19,9 @@ class _PerspectiveDataFormatter(object):
             data = []
         elif output_format in ('dict', 'numpy'):
             data = {}
+            if options["index"]:
+                data["__INDEX__"] = []
+
 
         for ridx in range(options["start_row"], options["end_row"]):
             row_path = data_slice.get_row_path(ridx) if options["has_row_path"] else []
@@ -58,6 +61,11 @@ class _PerspectiveDataFormatter(object):
                         data[ridx][name] = value
                     else:
                         data[name].append(value)
+
+            if options["index"]:
+                data["__INDEX__"].append([ridx])
+
+
 
         if output_format in ('dict', 'numpy') and (not options["has_row_path"] and ("__ROW_PATH__" in data)):
             del data["__ROW_PATH__"]
