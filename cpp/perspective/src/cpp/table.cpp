@@ -185,10 +185,6 @@ Table::validate_columns(const std::vector<std::string>& column_names) {
             std::cout << "Specified index " << m_index << " does not exist in data." << std::endl;
             PSP_COMPLAIN_AND_ABORT("Specified index '" + m_index + "' does not exist in data.");
         }
-        if (explicit_index && implicit_index) {
-            std::cout << "Specified index " << m_index << " twice - ignoring implicit __INDEX__" << std::endl;
-            PSP_COMPLAIN_AND_ABORT("Specified index '" + m_index + "' twice; ignoring implicit index.");
-        }
     }
 }
 
